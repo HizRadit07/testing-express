@@ -21,9 +21,9 @@ chirprdb.all = ()=>{
         });
     });
 };
-chirprdb.getMovieTitle = (userid)=>{
+chirprdb.getMovieTitle = (movietitle)=>{
     return new Promise((resolve,reject)=>{
-        pool.query('SELECT title FROM favorite_movies_table WHERE user_id = ?', userid,(err,results)=>{
+        pool.query('SELECT title FROM favorite_movies_table WHERE title = ?', movietitle,(err,results)=>{
             if(err){
                 return reject(err);
             }
