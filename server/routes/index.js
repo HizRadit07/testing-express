@@ -13,4 +13,13 @@ router.get('/', async (req,res,next)=>{
     }
 });
 
+router.get('/titles', async (req,res,next)=>{
+    try{
+        let results= await db.getMovieTitle(1);
+        res.json(results);
+    }catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
 module.exports = router;
