@@ -11,7 +11,18 @@ const pool = mysql.createPool({
 
 let chirprdb = {};
 
-chirprdb.all = ()=>{
+chirprdb.allUser = ()=>{
+    return new Promise((resolve,reject)=>{
+        pool.query('SELECT * FROM user_table', (err,results)=>{
+            if(err){
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+};
+
+chirprdb.allFavorite = ()=>{
     return new Promise((resolve,reject)=>{
         pool.query('SELECT * FROM favorite_movies_table', (err,results)=>{
             if(err){
@@ -21,9 +32,10 @@ chirprdb.all = ()=>{
         });
     });
 };
-chirprdb.getMovieTitle = (movietitle)=>{
+
+chirprdb.getMovieTitleByUserID = (userid)=>{
     return new Promise((resolve,reject)=>{
-        pool.query('SELECT title FROM favorite_movies_table WHERE title = ?', movietitle,(err,results)=>{
+        pool.query('SELECT title FROM favorite_movies_table WHERE user_id = ?', userid,(err,results)=>{
             if(err){
                 return reject(err);
             }
