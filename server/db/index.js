@@ -44,4 +44,15 @@ chirprdb.getMovieTitleByUserID = (userid)=>{
     });
 };
 
+chirprdb.getMovieTitleByUserID = (value1,value2,value3)=>{
+    return new Promise((resolve,reject)=>{
+        pool.query('INSERT INTO favorite_movies_table (id,title,user_id) VALUES (?)', [value1,value2,value3],(err,results)=>{
+            if(err){
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+};
+
 module.exports = chirprdb;

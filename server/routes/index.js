@@ -14,6 +14,18 @@ router.get('/database', async (req,res,next)=>{
         res.sendStatus(500);
     }
 });
+router.post('/movies/favorites', async (req,res,next)=>{
+    try{
+        let movieid = req.body.id;
+        let movieTitle = req.body.title;
+        let userid = req.body.user_id;
+        let results= await db.getMovieTitleByUserID(movieid,movieTitle,userid);
+        res.json(results);
+    }catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
 
 router.get('/movies', async (req,res,next)=>{
     res.sendStatus(403);
